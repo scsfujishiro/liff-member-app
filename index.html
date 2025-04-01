@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LINE会員登録</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>会員情報登録フォーム</h2>
+  <form id="form">
+    <input type="text" id="name" placeholder="名前" required><br>
+    <input type="email" id="email" placeholder="メールアドレス" required><br>
+    <input type="text" id="zip" placeholder="郵便番号" required><br>
+    <input type="text" id="address" placeholder="住所" required><br>
+    <input type="tel" id="phone" placeholder="電話番号" required><br>
+    <button type="submit">登録</button>
+  </form>
+
+  <script>
+    const GAS_URL = "あなたのGAS WebアプリのURL"; // ← あとで差し替えてください
+
+    let userId = "";
+
+    async function initializeLiff() {
+      await liff.init({ liffId: "あなたのLIFF ID" }); // ← LIFF IDをここに設定
+
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
+      }
+
+      const profile = await liff.getProfile();
+      userId = profile.userId;
+    }
+
+    document.getElementById("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        userId: userId,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        zip: document.getElementById("zip").value,
+        address: document.getElementById("address").value,
+        phone: document.getElementById("phone").value
+      };
+
+      try {
+        const res = await fetch(GAS_URL, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        const result = await res.text();
+        alert("登録完了しました！");
+        if (liff.isInClient()) {
+          liff.closeWindow();
+        }
+      } catch (err) {
+        console.error(err);
+        alert("送信に失敗しました");
+      }
+    });
+
+    initializeLiff();
+  </script>
+</body>
+</html>
