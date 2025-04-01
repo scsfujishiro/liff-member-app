@@ -17,12 +17,12 @@
   </form>
 
   <script>
-    const GAS_URL = "あなたのGAS WebアプリのURL"; // ← あとで差し替えてください
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxFmuNFuFOY6WfKdXQkmOIh47j3Zmntkwvp2zXjc-_NMOAI6o81iI9XlIRhZJFVw8Sk_A/exec"; // ← あとで差し替えてください
 
     let userId = "";
 
     async function initializeLiff() {
-      await liff.init({ liffId: "あなたのLIFF ID" }); // ← LIFF IDをここに設定
+      await liff.init({ liffId: "2007071670-Zvq5GyEg" }); // ← LIFF IDをここに設定
 
       if (!liff.isLoggedIn()) {
         liff.login();
