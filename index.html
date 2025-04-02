@@ -1,28 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>LINE会員登録</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #06c755;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #04a94e;
+    }
+  </style>
 </head>
 <body>
-  <h2>会員情報登録フォーム</h2>
-  <form id="form">
-    <input type="text" id="name" placeholder="名前" required><br>
-    <input type="email" id="email" placeholder="メールアドレス" required><br>
-    <input type="text" id="zip" placeholder="郵便番号" required><br>
-    <input type="text" id="address" placeholder="住所" required><br>
-    <input type="tel" id="phone" placeholder="電話番号" required><br>
-    <button type="submit">登録</button>
-  </form>
+  <div class="container">
+    <h2>会員情報登録フォーム</h2>
+    <form id="form">
+      <label for="name">名前</label>
+      <input type="text" id="name" placeholder="山田 太郎" required>
+
+      <label for="email">メールアドレス</label>
+      <input type="email" id="email" placeholder="example@example.com" required>
+
+      <label for="zip">郵便番号</label>
+      <input type="text" id="zip" placeholder="123-4567" required>
+
+      <label for="address">住所</label>
+      <input type="text" id="address" placeholder="東京都千代田区1-2-3" required>
+
+      <label for="phone">電話番号</label>
+      <input type="tel" id="phone" placeholder="090-1234-5678" required>
+
+      <button type="submit">登録</button>
+    </form>
+  </div>
 
   <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbxFmuNFuFOY6WfKdXQkmOIh47j3Zmntkwvp2zXjc-_NMOAI6o81iI9XlIRhZJFVw8Sk_A/exec"; // ← あとで差し替えてください
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxFmuNFuFOY6WfKdXQkmOIh47j3Zmntkwvp2zXjc-_NMOAI6o81iI9XlIRhZJFVw8Sk_A/exec";
 
     let userId = "";
 
     async function initializeLiff() {
-      await liff.init({ liffId: "2007071670-Zvq5GyEg" }); // ← LIFF IDをここに設定
+      await liff.init({ liffId: "2007071670-Zvq5GyEg" });
 
       if (!liff.isLoggedIn()) {
         liff.login();
